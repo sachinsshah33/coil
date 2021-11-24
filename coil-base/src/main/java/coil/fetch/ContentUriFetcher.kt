@@ -70,7 +70,7 @@ internal class ContentUriFetcher(
         if (data.authority != MediaStore.AUTHORITY) return false
         val segments = data.pathSegments
         val size = segments.size
-        return size >= 3 && segments[size - 3] == "audio" && segments[size - 2] == "albums"
+        return (ContentResolver.SCHEME_CONTENT == data.scheme && MediaStore.AUTHORITY == data.authority && "audio" in data.pathSegments) || size >= 3 && segments[size - 3] == "audio" && segments[size - 2] == "albums"
     }
 
     private fun newMusicThumbnailSizeOptions(): Bundle? {
